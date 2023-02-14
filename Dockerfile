@@ -26,6 +26,10 @@ RUN apt-get install -y --fix-missing \
     zip \
     && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
+RUN pip3 install Flask
+
+RUN pip3 install requests
+
 RUN cd ~ && \
     mkdir -p dlib && \
     git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
@@ -48,5 +52,5 @@ RUN cd /root/face_recognition && \
 
 # Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
 
-CMD cd /root/face_recognition/examples && \
-    python3 recognize_faces_in_pictures.py
+CMD cd /root/face_recognition/service && \
+    python3 service.py
